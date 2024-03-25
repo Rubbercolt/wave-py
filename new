@@ -1,0 +1,39 @@
+from tkinter import *
+
+window = Tk()
+window.title('Calculator')
+window.minsize(width=500, height=500)
+
+def append_symbol(symbol):
+    input.insert("end", symbol)
+
+def calculate():
+    try:
+        expression = input.get()
+        result = eval(expression)
+        word.config(text="Result: " + str(result))
+    except Exception as e:
+        word.config(text="Error: " + str(e))
+
+button_plus = Button(text="+", command=lambda: append_symbol('+'))
+button_plus.grid(row=1, column=0)
+
+button_minus = Button(text="-", command=lambda: append_symbol('-'))
+button_minus.grid(row=1, column=1)
+
+button_multiply = Button(text="*", command=lambda: append_symbol('*'))
+button_multiply.grid(row=1, column=2)
+
+button_divide = Button(text="/", command=lambda: append_symbol('/'))
+button_divide.grid(row=1, column=3)
+
+button_calculate = Button(text="Calculate", command=calculate)
+button_calculate.grid(row=2, column=0, columnspan=4)
+
+word = Label(text='Enter an expression (e.g., 2+2)')
+word.grid(row=0, column=0, columnspan=4)
+
+input = Entry()
+input.grid(row=3, column=0, columnspan=4)
+
+window.mainloop()
